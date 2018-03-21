@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://google/helloworld?useSSL=false&cloudSqlInstance=my-project:us-central1:helloworld&socketFactory=com.google.cloud.sql.mysql.SocketFactory
+    username: user
+    password: password
+  jpa:
+    database: mysql

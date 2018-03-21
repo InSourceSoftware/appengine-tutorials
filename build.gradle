@@ -1,0 +1,63 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "io.insource:appengine-tutorials-starter:$version"
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'com.google.cloud.tools.appengine'
+
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven {
+            url 'https://maven-central.storage.googleapis.com'
+        }
+        maven {
+            url "https://repo.spring.io/milestone"
+        }
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "io.insource:appengine-tutorials-starter:$version"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+            mavenBom "org.springframework.cloud:spring-cloud-gcp-dependencies:$springCloudGcpVersion"
+        }
+    }
+
+    dependencies {
+        compile 'javax.inject:javax.inject'
+        compile 'org.springframework.boot:spring-boot-starter-web'
+        compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+        compile 'mysql:mysql-connector-java'
+
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    bootRepackage {
+        mainClass = 'io.insource.tutorials.appengine.Application'
+    }
+
+    bootRun {
+        systemProperties System.properties as Map<String, ?>
+        addResources = true
+    }
+
+    appengine {
+        deploy {
+            stopPreviousVersion = true
+            promote = true
+        }
+    }
+}
