@@ -1,0 +1,8 @@
+apply plugin: 'war'
+
+dependencies {
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    compileOnly 'org.slf4j:jul-to-slf4j'
+    compileOnly 'javax.servlet:javax.servlet-api'
+    runtime 'org.springframework.cloud:spring-cloud-gcp-starter-sql-mysql'
+}

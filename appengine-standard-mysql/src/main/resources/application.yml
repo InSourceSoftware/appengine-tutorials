@@ -1,0 +1,18 @@
+server:
+  context-path: /
+
+spring:
+  application:
+    name: appengine-flexible-mysql
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+
+management:
+  contextPath: /_ah
+  security:
+    enabled: false

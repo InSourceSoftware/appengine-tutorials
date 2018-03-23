@@ -6,6 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication springApplication = new SpringApplication(Application.class);
+
+        String env = System.getenv("ENVIRONMENT");
+        if (env == null) {
+            env = "dev";
+        }
+
+        springApplication.setAdditionalProfiles(env);
+        springApplication.run(args);
     }
 }
